@@ -2,6 +2,8 @@ rsync --exclude ".git/" \
     --exclude ".idea/" \
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
+		--exclude ".vim" \
+		--exclude ".vimrc" \
 		--exclude "bootstrap.sh" \
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
