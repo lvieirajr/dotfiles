@@ -169,3 +169,25 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+
+function to_lower() {
+    if [ "$#" -ne 1 ]; then
+        echo "$(tput setaf 1)Usage: $(tput setaf 2)to_lower <String>$(tput sgr 0)"
+        return 1
+    fi
+    echo $1 | tr "[:upper:]" "[:lower:]"
+}
+function work() {
+    if [ "$#" -ne 1 ]; then
+        echo "$(tput setaf 1)Usage: $(tput setaf 2)work $(tput setaf 3)<Workspace>$(tput sgr 0)"
+        return 1
+    fi
+    project=$(to_lower "$1")
+    if [ -d "$WORKSPACE/$project" ]; then
+        cd "$WORKSPACE/$project"
+        pyenv activate &>/dev/null
+    else
+        echo "$(tput setaf 1)Workspace '$project' does not exist$(tput sgr 0)"
+    fi
+}
