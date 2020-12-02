@@ -9,6 +9,7 @@ rsync --exclude ".git/" \
 		--exclude "LICENSE-MIT.txt" \
 		--exclude "brew.sh" \
 		--exclude "bin/" \
+		--exclude "init/" \
 		--exclude "setup.sh" \
 		-avh --no-perms . ~;
 
@@ -34,3 +35,5 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
 fi;
 
 source ~/.bash_profile;
+
+#sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
