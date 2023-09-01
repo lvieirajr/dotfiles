@@ -2,7 +2,7 @@
 	name = Luis Antonio Vieira Junior
 	email = lvieira@lvieira.com
 	username = lvieirajr
-	signingkey = ssh-ed25519 <KEY_HERE>
+	signingkey = <SSH KEY>
 
 [core]
 	attributesfile = ~/.gitattributes
@@ -40,6 +40,9 @@
 
 [commit]
 	gpgsign = true
+
+[pull]
+    rebase = true
 
 [push]
 	autoSetupRemote = true

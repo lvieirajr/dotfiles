@@ -77,7 +77,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(1password aws brew colored-man-pages colorize common-aliases docker gh git github git-extras git-lfs gpg-agent helm iterm2 kubectl kubectx macos mvn npm pip poetry pyenv python yarn)
+plugins=(1password aws brew colored-man-pages colorize common-aliases docker gh git github git-extras git-lfs helm iterm2 kubectl kubectx macos npm pip poetry pyenv python yarn)
 
 source $ZSH/oh-my-zsh.sh
 
