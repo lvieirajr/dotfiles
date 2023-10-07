@@ -107,30 +107,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
 # Brew
 source $(brew --prefix git-extras)/share/git-extras/git-extras-completion.zsh
-source $(brew --prefix powerlevel10k)/powerlevel10k.zsh-theme
+source $(brew --prefix powerlevel10k)/share/powerlevel10k/powerlevel10k.zsh-theme
 source $(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
 # Powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# PyEnv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# TheFuck
-eval $(thefuck --alias)
-
-# Lock computer and activate ScreenSaver
-function afk() {
-  open -a /System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
-}
-
-# Go to a specific project in the Workspace
-function work() {
-  cd ~/Workspace/$1/
-}
