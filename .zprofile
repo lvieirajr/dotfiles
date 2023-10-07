@@ -32,8 +32,6 @@ function work() {
 function gitup() {
   if [ "$1" ]; then
     git checkout "$1"
-  else
-    echo no
   fi
 
   git fetch --all && git remote update && git remote prune origin && git pull
