@@ -10,9 +10,15 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+
 # Brew master command
 function brewit() {
-  brew update && brew upgrade && brew autoremove && brew cleanup && brew doctor
+  brew update && brew outdated --greedy && brew upgrade --greedy && brew autoremove && brew cleanup && brew doctor
 }
 
 
