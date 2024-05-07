@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -u
+set -eu
 
 HOMEBREW="/opt/homebrew"
 OH_MY_ZSH="$HOME/.oh-my-zsh"
