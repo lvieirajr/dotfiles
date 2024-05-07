@@ -2,14 +2,17 @@
 
 set -eu
 
+
 HOMEBREW="/opt/homebrew"
 OH_MY_ZSH="$HOME/.oh-my-zsh"
 POWERLEVEL10K="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 WORKSPACE="$HOME/Workspace"
 DOTFILES="$WORKSPACE/dotfiles"
 
+
 echo -e "Setting up Luis Vieira's dotfiles.\n"
 cd $HOME
+
 
 if [ ! -d $HOMEBREW ]; then
     echo -e "\nInstalling HomeBrew...\n"
@@ -29,13 +32,17 @@ if [ ! -d $POWERLEVEL10K ]; then
     echo -e "\nFinished installing Powerlevel10k.\n"
 fi
 
-echo -e "\nCreating Workspace directory...\n"
-mkdir $WORKSPACE
-echo -e "\nFinished creating Workspace directory.\n"
+if [ ! -d $WORKSPACE ]; then
+    echo -e "\nCreating Workspace directory...\n"
+    mkdir $WORKSPACE
+    echo -e "\nFinished creating Workspace directory.\n"
+fi
 
-echo -e "\nCloning dotfiles...\n"
-git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
-echo -e "\nFinished cloning dotfiles.\n"
+if [ ! -d $DOTFILES ]; then
+    echo -e "\nCloning dotfiles...\n"
+    git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
+    echo -e "\nFinished cloning dotfiles.\n"
+fi
 
 echo -e "\nCopying dotfiles to home directory...\n"
 rsync -av --force --exclude=README.md --exclude=setup.sh $DOTFILES/* $HOME
