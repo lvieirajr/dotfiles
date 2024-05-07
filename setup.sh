@@ -44,6 +44,6 @@ read -p "User friendly computer name: " computer_name
 read -p "Computer's host name: " host_name
 read -p "Computer's Net BIOS name (15 char limit): " net_bios_name
 
-echo -e "\Cleaning up...\n"
+echo -e "\nCleaning up...\n"
 rm -rf $DOTFILES
-echo -e "\Finished cleaning up.\n"
+echo -e "\nFinished cleaning up.\n"
