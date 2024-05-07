@@ -39,11 +39,9 @@ if [ ! -d $WORKSPACE ]; then
     echo -e "\nFinished creating Workspace directory.\n"
 fi
 
-if [ ! -d $DOTFILES ]; then
-    echo -e "\nCloning dotfiles...\n"
-    git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
-    echo -e "\nFinished cloning dotfiles.\n"
-fi
+echo -e "\nCloning dotfiles...\n"
+git clone -f --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
+echo -e "\nFinished cloning dotfiles.\n"
 
 echo -e "\nCopying dotfiles to home directory...\n"
 rsync -av --force --exclude=.git --exclude=README.md --exclude=setup.sh $DOTFILES/* $HOME
@@ -52,6 +50,10 @@ echo -e "\nFinished copying dotfiles to home directory.\n"
 read -p "User friendly computer name: " computer_name
 read -p "Computer's host name: " host_name
 read -p "Computer's Net BIOS name (15 char limit): " net_bios_name
+
+echo -e "\nRunning Brewfile...\n"
+brew bundle install
+echo -e "\nFinished running Brewfile.\n"
 
 echo -e "\nCleaning up...\n"
 rm -rf $DOTFILES
