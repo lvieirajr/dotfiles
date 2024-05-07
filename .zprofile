@@ -1,5 +1,12 @@
+# Powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 # Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+source $(brew --prefix git-extras)/share/git-extras/git-extras-completion.zsh
+source $(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # PyEnv
