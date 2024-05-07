@@ -2,6 +2,7 @@
 
 set -u
 
+HOMEBREW="/usr/local/Homebrew"
 OH_MY_ZSH="$HOME/.oh-my-zsh"
 POWERLEVEL10K="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 WORKSPACE="$HOME/Workspace"
@@ -10,7 +11,7 @@ DOTFILES="$WORKSPACE/dotfiles"
 echo -e "Setting up Luis Vieira's dotfiles.\n"
 cd $HOME
 
-if [ ! -x "$(command -v brew)" ]; then
+if [ ! -d $HOMEBREW ]; then
     echo -e "\nInstalling HomeBrew...\n"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo -e "\nFinished installing HomeBrew.\n"
