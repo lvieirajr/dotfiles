@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set shell options
+# Shell options
 set -eu
 shopt -s dotglob
 
