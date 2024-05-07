@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -eu
+shopt -s dotglob
 
 
 HOMEBREW="/opt/homebrew"
@@ -45,7 +46,7 @@ if [ ! -d $DOTFILES ]; then
 fi
 
 echo -e "\nCopying dotfiles to home directory...\n"
-rsync -av --force $DOTFILES/* $HOME
+rsync -av --force --exclude=.git --exclude=README.md --exclude=setup.sh $DOTFILES/* $HOME
 echo -e "\nFinished copying dotfiles to home directory.\n"
 
 read -p "User friendly computer name: " computer_name
