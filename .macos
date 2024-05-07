@@ -1,8 +1,8 @@
 # Naming
-#sudo scutil --set ComputerName "Luis Vieira's 2023 MacBook Pro"
-#sudo scutil --set HostName "luis-vieira-2023-macbook-pro"
-#sudo scutil --set LocalHostName "luis-vieira-2023-macbook-pro"
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "UPDATE_THIS"
+sudo scutil --set ComputerName "Luis Vieira's 2023 MacBook Pro"
+sudo scutil --set HostName "luis-vieira-2023-macbook-pro"
+sudo scutil --set LocalHostName "luis-vieira-2023-macbook-pro"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "LV2023MBP"
 
 # Random
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
