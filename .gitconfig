@@ -2,7 +2,7 @@
 	name = Luis Antonio Vieira Junior
 	email = lvieira@lvieira.com
 	username = lvieirajr
-	signingkey = <SSH KEY>
+	signingkey = <SSH_KEY>
 
 [core]
 	attributesfile = ~/.gitattributes
