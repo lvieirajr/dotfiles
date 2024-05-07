@@ -8,6 +8,15 @@ DOTFILES_REPO="https://github.com/lvieirajr/dotfiles.git"
 # Change to User's root directory
 cd ~/
 
+# Install Brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Oh My ZSH
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install Powerlevel10k ZSH Theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
 # Create Workspace directory
 mkdir ${WORKSPACE_DIR}
 
@@ -25,9 +34,3 @@ read -p "Computer's host name: " host_name
 
 # Request the computer's Net BIOS name
 read -p "Computer's Net BIOS name (15 char limit): " net_bios_name
-
-# Install Brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-
-
