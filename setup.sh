@@ -2,23 +2,30 @@
 
 set -eux
 
+OH_MY_ZSH="$HOME/.oh-my-zsh"
 WORKSPACE="$HOME/Workspace"
 DOTFILES="$WORKSPACE/dotfiles"
 
 echo -e "Setting up Luis Vieira's dotfiles.\n"
 cd $HOME
 
-echo -e "\nInstalling HomeBrew...\n"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo -e "\nFinished installing HomeBrew.\n"
+if [ ! -x "$(command -v brew)" ]; then
+    echo -e "\nInstalling HomeBrew...\n"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo -e "\nFinished installing HomeBrew.\n"
+fi
 
-echo -e "\nInstalling Oh my zsh...\n"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-echo -e "\nFinished installing Oh my zsh.\n"
+if [ ! -d $OH_MY_ZSH ]; then
+    echo -e "\nInstalling Oh my zsh...\n"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo -e "\nFinished installing Oh my zsh.\n"
+fi
 
-echo -e "\nInstalling Powerlevel10k...\n"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-echo -e "\nFinished installing Powerlevel10k.\n"
+if [ ! -d "$OH_MY_ZSH/custom/themes/powerlevel10k" ]; then
+    echo -e "\nInstalling Powerlevel10k...\n"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    echo -e "\nFinished installing Powerlevel10k.\n"
+fi
 
 echo -e "\nCreating Workspace directory...\n"
 mkdir $WORKSPACE
