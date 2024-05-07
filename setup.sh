@@ -45,7 +45,10 @@ fi
 
 # Dotfiles
 echo -e "\nCloning dotfiles...\n"
-git clone -f --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
+if [ ! -d $DOTFILES ]; then
+    rm -rf $DOTFILES
+fi
+git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
 echo -e "\nFinished cloning dotfiles.\n"
 
 echo -e "\nCopying dotfiles to home directory...\n"
