@@ -48,7 +48,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(1password aws brew colored-man-pages colorize common-aliases docker gh git github git-extras git-lfs helm iterm2 kubectl kubectx macos npm pip poetry pyenv python yarn)
+plugins=(1password aws brew colored-man-pages colorize common-aliases docker gh git github git-extras git-lfs helm iterm2 kubectl kubectx macos npm nvm pip poetry pyenv python yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,10 +110,5 @@ source $ZSH/oh-my-zsh.sh
 
 # Brew
 source $(brew --prefix git-extras)/share/git-extras/git-extras-completion.zsh
-source $(brew --prefix powerlevel10k)/share/powerlevel10k/powerlevel10k.zsh-theme
 source $(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-# Powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
