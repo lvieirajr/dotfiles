@@ -3,6 +3,7 @@
 set -eux
 
 OH_MY_ZSH="$HOME/.oh-my-zsh"
+POWERLEVEL10K="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 WORKSPACE="$HOME/Workspace"
 DOTFILES="$WORKSPACE/dotfiles"
 
@@ -21,7 +22,7 @@ if [ ! -d $OH_MY_ZSH ]; then
     echo -e "\nFinished installing Oh my zsh.\n"
 fi
 
-if [ ! -d "$OH_MY_ZSH/custom/themes/powerlevel10k" ]; then
+if [ ! -d $POWERLEVEL10K ]; then
     echo -e "\nInstalling Powerlevel10k...\n"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     echo -e "\nFinished installing Powerlevel10k.\n"
