@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -u
 
 OH_MY_ZSH="$HOME/.oh-my-zsh"
 POWERLEVEL10K="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
