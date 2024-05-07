@@ -2,35 +2,39 @@
 
 set -eux
 
-WORKSPACE_DIR="Workspace"
-DOTFILES_REPO="https://github.com/lvieirajr/dotfiles.git"
+WORKSPACE="$HOME/Workspace"
+DOTFILES="$WORKSPACE/dotfiles"
 
-# Change to User's root directory
-cd ~/
+echo -e "Setting up Luis Vieira's dotfiles.\n"
+cd $HOME
 
-# Install Brew
+echo -e "\nInstalling HomeBrew...\n"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo -e "\nFinished installing HomeBrew.\n"
 
-# Install Oh My ZSH
+echo -e "\nInstalling Oh my zsh...\n"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo -e "\nFinished installing Oh my zsh.\n"
 
-# Install Powerlevel10k ZSH Theme
+echo -e "\nInstalling Powerlevel10k...\n"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+echo -e "\nFinished installing Powerlevel10k.\n"
 
-# Create Workspace directory
-mkdir ${WORKSPACE_DIR}
+echo -e "\nCreating Workspace directory...\n"
+mkdir $WORKSPACE
+echo -e "\nFinished creating Workspace directory.\n"
 
-# Clone dotfiles repository to '~/Workspace/dotfiles/'
-git clone --depth=1 ${DOTFILES_REPO} ${WORKSPACE_DIR}/dotfiles
+echo -e "\nCloning dotfiles...\n"
+git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
+echo -e "\nFinished cloning dotfiles.\n"
 
-# Copy dotfiles into the User's root directory
-rsync -av --exclude=README.md --exclude=setup.sh ${WORKSPACE_DIR}/dotfiles/* .
+echo -e "\nCopying dotfiles to home directory...\n"
+rsync -av --force --exclude=README.md --exclude=setup.sh $DOTFILES/* $HOME
+echo -e "\nFinished copying dotfiles to home directory.\n"
 
-# Request the computer's name
 read -p "User friendly computer name: " computer_name
-
-# Request the computer's hostname
 read -p "Computer's host name: " host_name
-
-# Request the computer's Net BIOS name
 read -p "Computer's Net BIOS name (15 char limit): " net_bios_name
+
+# Delete cloned dotfiles
+rm -rf $DOTFILES
