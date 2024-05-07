@@ -45,7 +45,7 @@ if [ ! -d $DOTFILES ]; then
 fi
 
 echo -e "\nCopying dotfiles to home directory...\n"
-rsync -av --force --exclude=README.md --exclude=setup.sh $DOTFILES/* $HOME
+rsync -av --force $DOTFILES/* $HOME
 echo -e "\nFinished copying dotfiles to home directory.\n"
 
 read -p "User friendly computer name: " computer_name
