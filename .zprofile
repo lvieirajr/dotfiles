@@ -37,7 +37,24 @@ function afk() {
 
 # Go to a specific project in the Workspace
 function work() {
-  cd ~/Workspace/$1/
+  local dir=$HOME/Workspace/$1/
+
+  if [ ! -d $dir ]; then
+    echo "work: $1: not a valid workspace project"
+    return 1
+  fi
+
+  cd $dir
+
+  if [ -f ".python-version" ]; then
+    pyenv activate &> /dev/null
+    echo "Using Python: $(cat .python-version)"
+  fi
+
+  if [ -f ".nvmrc" ]; then
+    nvm use &> /dev/null
+    echo "Using Node: $(cat .nvmrc)"
+  fi
 }
 
 

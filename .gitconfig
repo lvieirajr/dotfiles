@@ -30,7 +30,7 @@
 	tool = vimdiff
 
 [diff "bin"]
-	texconv = hexdumo -v -C
+	texconv = hexdump -v -C
 
 [difftool]
 	prompt = false

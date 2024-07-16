@@ -1,9 +1,10 @@
 # Taps
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 tap "homebrew/services"
 
 # Brews
+brew "asdf"
+brew "aws-sam-cli"
 brew "awscli"
 brew "diff-so-fancy"
 brew "gh"
@@ -19,9 +20,6 @@ brew "kubectx"
 brew "kubernetes-cli"
 brew "mas"
 brew "node"
-brew "nvm"
-brew "pyenv"
-brew "pyenv-virtualenv"
 brew "python3"
 brew "stripe/stripe-cli/stripe"
 brew "tldr"
