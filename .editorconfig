@@ -6,13 +6,54 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{*.cjs,json,js,jsx,ts,tsx,yaml,yml}]
+[*.{cjs,js,jsx,mjs,ts,tsx}]
 indent_style = space
 indent_size = 2
+
+[*.{css,scss}]
+indent_style = space
+indent_size = 2
+
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.md]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
 
 [*.py]
 indent_style = space
 indent_size = 4
+
+[*.{bash,sh,zsh}]
+indent_style = space
+indent_size = 2
+
+[*.toml]
+indent_style = space
+indent_size = 2
+
+[*.{csv,tsv,txt}]
+indent_style = space
+indent_size = 4
+
+[*.xml]
+indent_style = space
+indent_size = 2
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
+[Dockerfile]
+indent_style = space
+indent_size = 2
 
 [Makefile]
 indent_style = tab
