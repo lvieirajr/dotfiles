@@ -12,9 +12,9 @@ source "$(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/z
 
 # PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
-eval "$(pyenv init -)"
+eval "$(pyenv init - zsh)"
 eval "$(pyenv virtualenv-init -)"
 
 
