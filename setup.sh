@@ -23,6 +23,7 @@ if [ ! -d $HOMEBREW ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo -e "Finished installing HomeBrew."
 fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Oh My ZSH
 if [ ! -d $OH_MY_ZSH ]; then
