@@ -1,7 +1,5 @@
 # Taps
 tap "homebrew/bundle"
-tap "homebrew/casks"
-tap "homebrew/core"
 tap "homebrew/services"
 
 # Brews
