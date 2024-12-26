@@ -1,9 +1,3 @@
-# Naming
-sudo scutil --set ComputerName "<COMPUTER_NAME>"
-sudo scutil --set HostName "<HOST_NAME>"
-sudo scutil --set LocalHostName "<HOST_NAME>"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "<NET_BIOS_NAME>"
-
 # Random
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 defaults write NSGlobalDomain NSUseAnimatedFocusRing -bool false
