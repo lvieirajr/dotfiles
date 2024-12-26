@@ -66,8 +66,8 @@
 	prompt = false
 
 [fetch]
-    all = true
-    prune = true
+	all = true
+	prune = true
 
 [help]
 	autocorrect = 1
