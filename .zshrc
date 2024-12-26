@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(1password aws brew colored-man-pages colorize common-aliases cp docker gh git github git-extras git-lfs helm iterm2 kubectl kubectx macos mise node npm pip poetry postgres pre-commit python ssh ssh-agent stripe sudo yarn)
+plugins=(1password asdf aws brew colored-man-pages colorize common-aliases direnv docker gh git github git-extras git-lfs helm iterm2 kubectl kubectx macos mise pip poetry pre-commit python)
 
 source $ZSH/oh-my-zsh.sh
 
