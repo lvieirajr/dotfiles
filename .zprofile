@@ -4,9 +4,30 @@
 
 # Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
 source "$(brew --prefix git-extras)/share/git-extras/git-extras-completion.zsh"
 source "$(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+
+# PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+
+# Lock computer and activate ScreenSaver
+function afk() {
+  open -a /System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
+}
 
 
 # Upgrade everything with Brew
@@ -22,12 +43,6 @@ function gitup() {
   fi
 
   git fetch --all --prune && git remote update --prune && git pull
-}
-
-
-# Lock computer and activate ScreenSaver
-function afk() {
-  open -a /System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
 }
 
 
