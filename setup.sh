@@ -10,7 +10,7 @@ HOMEBREW=/opt/homebrew
 OH_MY_ZSH=$HOME/.oh-my-zsh
 POWERLEVEL10K=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 WORKSPACE=$HOME/Workspace
-PERSONAL_PROJECTS=$HOME/Workspace/lvieirajr
+PERSONAL_PROJECTS=$WORKSPACE/lvieirajr
 DOTFILES=$PERSONAL_PROJECTS/dotfiles
 
 # Setup start
