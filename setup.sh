@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Shell options
-set -eu
-set -o pipefail
+set -eou pipefail
 shopt -s dotglob
 
 # Constants
@@ -17,11 +16,22 @@ DOTFILES=$PERSONAL_PROJECTS/dotfiles
 echo -e "Setting up Luis Vieira's dotfiles."
 cd $HOME
 
+# Install Xcode Command Line Tools
+if ! xcode-select -p &>/dev/null; then
+    echo -e "Installing Xcode Command Line Tools..."
+    xcode-select --install
+fi
+
+# Agree to the license and install Rosetta 2
+if ! /usr/bin/pgrep oahd &>/dev/null; then
+    echo -e "Installing Rosetta 2..."
+    softwareupdate --agree-to-license --install-rosetta
+fi
+
 # HomeBrew
 if [ ! -d $HOMEBREW ]; then
     echo -e "Installing HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo -e "Finished installing HomeBrew."
 fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -29,21 +39,18 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 if [ ! -d $OH_MY_ZSH ]; then
     echo -e "Installing Oh my zsh..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    echo -e "Finished installing Oh my zsh."
 fi
 
 # Powerlevel10k
 if [ ! -d $POWERLEVEL10K ]; then
     echo -e "Installing Powerlevel10k..."
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    echo -e "Finished installing Powerlevel10k."
 fi
 
 # Workspace
 if [ ! -d $PERSONAL_PROJECTS ]; then
     echo -e "Creating personal projects directory..."
     mkdir -p $PERSONAL_PROJECTS
-    echo -e "Finished creating personal projects directory."
 fi
 
 # Dotfiles
@@ -54,11 +61,9 @@ if [ -d $DOTFILES ]; then
 fi
 
 git clone --depth=1 https://github.com/lvieirajr/dotfiles.git $DOTFILES
-echo -e "Finished cloning dotfiles."
 
 echo -e "Copying dotfiles to home directory..."
 rsync -av --force --exclude='.git' --exclude='README.md' --exclude='setup.sh' $DOTFILES/* $HOME/
-echo -e "Finished copying dotfiles to home directory."
 
 # MacOS defaults
 echo -e "Setting computer names..."
@@ -94,16 +99,11 @@ while true; do
     fi
 done
 
-echo -e "Finished setting computer names..."
-
-
 # Brewfile
 echo -e "Installing dependencies from Brewfile..."
 brew bundle install
-echo -e "Finished installing dependencies from Brewfile."
-
 
 # Clean up
 echo -e "Cleaning up..."
 rm -rf $DOTFILES
-echo -e "Finished cleaning up."
+echo -e "Setup complete."
