@@ -1,27 +1,19 @@
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+
 # Powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 # Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-source "$(brew --prefix git-extras)/share/git-extras/git-extras-completion.zsh"
 source "$(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 
-# PyEnv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-
-eval "$(pyenv init - zsh)"
-eval "$(pyenv virtualenv-init -)"
-
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# Mise en place
+eval "$(mise activate zsh)"
 
 
 # Lock computer and activate ScreenSaver
@@ -32,7 +24,7 @@ function afk() {
 
 # Upgrade everything with Brew
 function brewit() {
-  brew update && brew outdated --greedy && brew upgrade --greedy && brew autoremove && brew cleanup && brew doctor
+  brew update && brew outdated --greedy && brew upgrade && brew autoremove && brew cleanup && brew doctor
 }
 
 
