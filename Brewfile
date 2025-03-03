@@ -3,12 +3,8 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 
 # Brews
-brew "awscli"
 brew "diff-so-fancy"
 brew "git"
-brew "helm"
-brew "k9s"
-brew "kubernetes-cli"
 brew "mas"
 brew "mise"
 brew "zsh-autosuggestions"

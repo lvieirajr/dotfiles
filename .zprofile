@@ -8,8 +8,16 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
 source "$(brew --prefix zsh-autosuggestions)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 
 # Mise en place
@@ -22,9 +30,9 @@ function afk() {
 }
 
 
-# Upgrade everything with Brew
-function brewit() {
-  brew update && brew outdated --greedy && brew upgrade && brew autoremove && brew cleanup && brew doctor
+# Upgrade all Brew and Mise dependencies
+function up() {
+  brew update && brew outdated --greedy && brew upgrade && brew autoremove && brew cleanup && brew doctor && mise up
 }
 
 
