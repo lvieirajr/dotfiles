@@ -15,7 +15,8 @@ python = "3.13"
 uv = "latest"
 
 # tools installed with uvx
-"pipx:ipython" = { version = "latest", uvx_args = "--with ipdb,ipykernel,numpy" }
-"pipx:mypy" = { version = "latest" }
-"pipx:pre-commit" = { version = "latest" }
-"pipx:ruff" = { version = "latest" }
+"pipx:ipython" = { version = "latest", uvx_args = "--with ipdb,ipykernel" }
+"pipx:mypy" = "latest"
+"pipx:pre-commit" = "latest"
+"pipx:ruff" = "latest"
+"pipx:watchdog" = "latest"
