@@ -16,6 +16,7 @@ uv = "latest"
 
 [hooks]
 postinstall = [
+  "mise sync python --uv",
   "corepack install -g pnpm yarn",
   "corepack enable pnpm yarn",
 ]
