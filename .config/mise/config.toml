@@ -1,5 +1,6 @@
 [tools]
 aws-cli = "latest"
+bun = "latest"
 helm = "latest"
 kubectl = "latest"
 k9s = "latest"
@@ -21,6 +22,7 @@ postinstall = [
 
 [settings]
 experimental = true
+npm.bun = true
 pipx.uvx = true
 python.uv_venv_auto = true
 
