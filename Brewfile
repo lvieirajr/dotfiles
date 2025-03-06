@@ -5,6 +5,7 @@ tap "homebrew/services"
 # Brews
 brew "diff-so-fancy"
 brew "git"
+brew "gnupg"
 brew "mas"
 brew "mise"
 brew "zsh-autosuggestions"
