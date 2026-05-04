@@ -112,6 +112,9 @@ compinit
 echo -e "Installing Mise-en-place tools..."
 mise up
 
+# Safety fix for zsh completions
+compaudit | xargs chmod g-w,o-w
+
 # Clean up
 echo -e "Cleaning up..."
 rm -rf $DOTFILES

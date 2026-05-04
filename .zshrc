@@ -1,108 +1,223 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Homebrew shell environment
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# Env vars
+export PATH="$HOME/.local/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+FPATH="$(brew --prefix)/share/zsh-completions:$FPATH"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Zsh plugins
+plugins=(common-aliases macos)
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Oh My Zsh
+source "$ZSH/oh-my-zsh.sh"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Brew zsh plugins
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+# Mise en place shell environment
+eval "$(mise activate zsh)"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# Lock computer and activate ScreenSaver
+function afk() {
+  open -a /System/Library/CoreServices/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
+}
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(1password aws brew colored-man-pages colorize common-aliases docker git helm iterm2 kubectl macos mise pip python)
+# Upgrade all Brew and Mise dependencies
+function up() {
+  brew update && brew outdated --greedy && brew upgrade && brew autoremove && brew cleanup && brew doctor && mise up
+}
 
-source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Get most up-to-date state of the git branch
+function gitup() {
+  if [ "$1" ]; then
+    git checkout "$1"
+  fi
 
-# export MANPATH="/usr/local/man:$MANPATH"
+  git fetch --all --prune && git remote update --prune && git pull
+}
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Go to a specific project in the Workspace
+function work() {
+  # Zsh arrays
+  local -a matches match_paths
+  local target="$1"  # The folder name or path to search for
+  local flag="$2"    # Optional flag: -o (organization), -p (project), or -f (full)
+  local base_dir="$HOME/Workspace"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+  setopt localoptions null_glob  # Don't choke on empty globs
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+  # If no argument is given, just cd into Workspace
+  if [ -z "$target" ]; then
+    cd "$base_dir" || return
+    return 0
+  fi
+
+  ####################################################
+  # Search "project" folders (any organization/project)
+  # Return codes:
+  #   0 -> exactly one match
+  #   1 -> multiple matches
+  #   2 -> no matches
+  ####################################################
+  function search_project() {
+    matches=()
+    match_paths=()
+
+    for org_dir in "$base_dir"/*; do
+      for proj_dir in "$org_dir"/*; do
+        if [ -d "$proj_dir" ] && [[ "$(basename "$proj_dir")" == "$target" ]]; then
+          matches+=("$(basename "$org_dir")")
+          match_paths+=("$proj_dir")
+        fi
+      done
+    done
+
+    if [ "${#matches[@]}" -gt 1 ]; then
+      echo "work: Multiple projects named '$target' found under different organizations:"
+      for m in "${matches[@]}"; do
+        echo "  - $m"
+      done
+      return 1  # multiple matches
+    fi
+
+    if [ "${#matches[@]}" -eq 1 ]; then
+      cd "${match_paths[1]}" || return
+      return 0  # found one match
+    fi
+
+    return 2    # no matches
+  }
+
+  ####################################################
+  # Search "full" path:
+  #   0 -> exactly one match
+  #   1 -> multiple (if you want that scenario)
+  #   2 -> no matches
+  ####################################################
+  function search_full() {
+    local full_path="$base_dir/$target"
+
+    # Direct folder under ~/Workspace
+    if [ -d "$full_path" ]; then
+      cd "$full_path" || return
+      return 0
+    fi
+
+    # Otherwise check if it's an organization/project combo
+    for org_dir in "$base_dir"/*; do
+      for proj_dir in "$org_dir"/*; do
+        if [ -d "$proj_dir" ] && [[ "$org_dir/$(basename "$proj_dir")" == "$full_path" ]]; then
+          cd "$proj_dir" || return
+          return 0
+        fi
+      done
+    done
+    return 2
+  }
+
+  ####################################################
+  # Search "organization" folders (top level only)
+  #   0 -> found
+  #   2 -> not found
+  ####################################################
+  function search_org() {
+    for org_dir in "$base_dir"/*; do
+      if [ -d "$org_dir" ] && [[ "$(basename "$org_dir")" == "$target" ]]; then
+        cd "$org_dir" || return
+        return 0
+      fi
+    done
+    return 2
+  }
+
+  # Helper to stop searching if we get return=1 or 0
+  # usage: run_search search_function_name
+  #  - If 0, we return immediately (success).
+  #  - If 1, we return immediately (multiple matches).
+  #  - If 2, keep going.
+  function run_search() {
+    "$1"
+    local code=$?
+    if [ $code -eq 0 ] || [ $code -eq 1 ]; then
+      return $code
+    fi
+    # otherwise, code == 2 (not found), keep going
+    return 2
+  }
+
+  # If the user specified a flag, use that specific search only
+  case "$flag" in
+    -p)  # Project
+      run_search search_project
+      case $? in
+        0) return 0 ;;
+        1) return 1 ;;
+      esac
+      echo "work: '$target' not found as a project"
+      return 1
+      ;;
+    -f)  # Full path
+      run_search search_full
+      case $? in
+        0) return 0 ;;
+        1) return 1 ;;
+      esac
+      echo "work: '$target' not found as a full path in $base_dir"
+      return 1
+      ;;
+    -o)  # Organization
+      run_search search_org
+      case $? in
+        0) return 0 ;;
+        1) return 1 ;;  # not used for organization
+      esac
+      echo "work: '$target' not found as an organization"
+      return 1
+      ;;
+  esac
+
+  # Otherwise, do the default order: project -> full -> organization
+  run_search search_project
+  case $? in
+    0) return 0 ;;
+    1) return 1 ;;
+  esac
+
+  run_search search_full
+  case $? in
+    0) return 0 ;;
+    1) return 1 ;;
+  esac
+
+  run_search search_org
+  case $? in
+    0) return 0 ;;
+    1) return 1 ;;
+  esac
+
+  # If all returned 2 (no matches)
+  echo "work: '$target' not found"
+  return 1
+}

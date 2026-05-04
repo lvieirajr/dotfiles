@@ -36,7 +36,7 @@ Temporary Items
 *.msm
 *.msp
 *.stackdump
-$RECYCLE.BIN/
+$RECYCLE.BIN
 [Dd]esktop.ini
 Thumbs.db
 Thumbs.db:encryptable
@@ -53,9 +53,37 @@ ehthumbs_vista.db
 *.tmp
 
 # IDEs
-.idea/
+.claude
+.idea
 *.project
 *.tmproj
 *.vscode
 .devcontainer
+
+# Env
+.env
 ### END Others ###
+
+
+### START Languages ###
+# Distribution
+build
+dist
+eggs
+sdist
+wheels
+
+# Python
+__pycache__/
+*.py[codz]
+*$py.class
+.venv
+venv
+.coverage
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# JS/TS
+node_modules
+### END Languages ###

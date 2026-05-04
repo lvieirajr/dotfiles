@@ -2,31 +2,27 @@
 aws-cli = "latest"
 bun = "latest"
 helm = "latest"
-kubectl = "latest"
 k9s = "latest"
-node = "22"
-python = "3.13"
+kubectl = "latest"
+node = "lts"
+python = "3.14"
+usage = "latest"
 uv = "latest"
 
 "pipx:ipython" = { version = "latest", uvx_args = "--with ipdb,ipykernel" }
-"pipx:mypy" = "latest"
-"pipx:pre-commit" = "latest"
-"pipx:ruff" = "latest"
-"pipx:watchdog" = "latest"
-
-[hooks]
-postinstall = [
-  "mise sync python --uv",
-  "corepack install -g pnpm yarn",
-  "corepack enable pnpm yarn",
-]
 
 [settings]
+activate_aggressive = true
+env_shell_expand = true
+exec_auto_install = true
 experimental = true
-npm.bun = true
+minimum_release_age = "7d"
+not_found_auto_install = true
+npm.package_manager = "bun"
 pipx.uvx = true
-python.uv_venv_auto = true
+python.uv_venv_auto = "create|source"
+task.run_auto_install = true
+trusted_config_paths = ["~/.config/mise", "~/Workspace"]
 
 [env]
-MISE_NODE_COREPACK = true
 UV_COMPILE_BYTECODE = true
