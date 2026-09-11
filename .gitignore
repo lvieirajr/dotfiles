@@ -54,6 +54,7 @@ ehthumbs_vista.db
 
 # IDEs
 .claude
+.codex
 .idea
 *.project
 *.tmproj
@@ -74,15 +75,19 @@ sdist
 wheels
 
 # Python
-__pycache__/
+__pycache__
+**/__pycache__
+*.egg-info
+**/*.egg-info
 *.py[codz]
 *$py.class
 .venv
 venv
 .coverage
-.mypy_cache/
-.pytest_cache/
-.ruff_cache/
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.secrets.*
 
 # JS/TS
 node_modules
