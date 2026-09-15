@@ -33,7 +33,7 @@ source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 
 # Mise en place shell environment
-eval "$(mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
 
 # Lock computer and activate ScreenSaver

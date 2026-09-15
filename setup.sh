@@ -144,6 +144,7 @@ fi
 
 # Mise
 echo "Setting up Mise-en-place..."
+curl https://mise.run | sh
 mise install
 
 # Zsh completions
