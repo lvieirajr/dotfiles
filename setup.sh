@@ -147,6 +147,13 @@ echo "Setting up Mise-en-place..."
 curl https://mise.run | sh
 mise install
 
+# Install pstack through each harness's native plugin manager.
+echo "Installing pstack for Claude Code and Codex..."
+claude plugin marketplace add lvieirajr/pstack-claude
+claude plugin install pstack@pstack-claude
+codex plugin marketplace add lvieirajr/pstack-claude
+codex plugin add pstack@pstack-claude
+
 # Zsh completions
 echo "Configuring zsh completions..."
 
