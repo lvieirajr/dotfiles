@@ -5,8 +5,7 @@ Guidelines to reduce common LLM coding mistakes. Apply alongside project-specifi
 These guidelines bias toward correctness, simplicity, and small diffs over speed.
 For trivial tasks, use judgment.
 
-Project-specific instructions and established repository conventions take precedence
-over these defaults unless explicitly asked to change them.
+Project-specific instructions and established repository conventions take precedence over these defaults unless explicitly asked to change them.
 
 
 ## 1. Tooling
@@ -80,27 +79,52 @@ When your changes create orphans:
 Every changed line should have a clear relationship to the requested task.
 
 
-## 5. Goal-Driven Execution
+## 5. Comments
+
+**Explain missing context. Do not narrate the code.**
+
+- Prefer clear names and simple code over explanatory comments.
+- Explain only non-obvious decisions, constraints, contracts, or side effects.
+- Don't paraphrase code or explain ordinary language or library behavior.
+- Don't add docstrings that merely repeat names, signatures, or implementation.
+- Follow established public API documentation conventions.
+- Don't invent rationale or historical context.
+- Keep comments concise. Apply these rules to test code too.
+
+Ask yourself: "What does this explain that the code does not?"
+If there is no clear answer, omit it.
+
+
+## 6. Meaningful Tests
+
+**Test behavior and business rules, not declarations or mechanics.**
+
+- Test outcomes, state changes, application rules, and meaningful failures.
+- Derive expectations from requirements, not the implementation.
+- Don't write tests that merely restate enum definitions, constants, or assignments.
+- Don't test trivial accessors or ordinary language, framework, or library behavior.
+- Assert outcomes, not internal calls, unless those calls are the contract.
+- Cover distinct risks. Avoid redundant cases.
+- Don't weaken tests solely to make them pass.
+
+Ask yourself: "What realistic application regression would this catch?"
+If it only checks a declaration or library feature, omit it.
+
+
+## 7. Goal-Driven Execution
 
 **Define success criteria. Work until they are verified.**
 
-Transform tasks into verifiable goals:
-- "Add validation" → add tests for invalid inputs, then make them pass.
-- "Fix the bug" → reproduce the bug with a test when practical, then make it pass.
-- "Refactor X" → establish existing behavior, refactor, then verify behavior is unchanged.
+Turn tasks into verifiable goals:
+- "Add validation" → check valid and invalid inputs against application rules.
+- "Fix a bug" → reproduce it with a test when practical, then verify the fix.
+- "Refactor X" → verify that existing behavior stays unchanged.
 
-For multi-step tasks, use a brief plan when it adds clarity:
-
-```text
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Prefer executing and verifying over repeatedly asking for confirmation when the goal is clear.
+Reuse existing tests when sufficient. Add tests for behavior not adequately covered.
+Non-behavioral changes don't need new tests unless explicitly requested.
 
 
-## 6. Verification
+## 8. Verification
 
 **Never claim something works unless it was verified.**
 
@@ -108,6 +132,7 @@ Before finishing:
 - Run the most relevant tests for the changed behavior.
 - Run applicable linting, formatting, and type checks when practical.
 - Check the resulting diff for unrelated changes.
+- Review added comments and tests against the standards above.
 - If a check cannot be run, say so explicitly.
 - Report what was actually verified, not what should theoretically work.
 

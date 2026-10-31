@@ -142,17 +142,38 @@ if [ -d "$HOMEBREW/share/zsh" ]; then
   chmod -R go-w "$HOMEBREW/share/zsh"
 fi
 
+
+# Install pstack through each harness's native plugin manager.
+echo "Installing pstack for Claude Code and Codex..."
+
+claude plugin marketplace add lvieirajr/pstack-claude
+claude plugin marketplace update pstack
+claude plugin install pstack@pstack
+claude plugin update pstack@pstack
+
+codex plugin marketplace add lvieirajr/pstack-claude
+codex plugin marketplace upgrade pstack
+codex plugin add pstack@pstack
+
+
+# Install ponytail through each harness's native plugin manager.
+echo "Installing ponytail for Claude Code and Codex..."
+
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin marketplace update ponytail
+claude plugin install ponytail@ponytail
+claude plugin update ponytail@ponytail
+
+codex plugin marketplace add DietrichGebert/ponytail
+codex plugin marketplace upgrade ponytail
+codex plugin add ponytail@ponytail
+
+
 # Mise
 echo "Setting up Mise-en-place..."
 curl https://mise.run | sh
 mise install
 
-# Install pstack through each harness's native plugin manager.
-echo "Installing pstack for Claude Code and Codex..."
-claude plugin marketplace add lvieirajr/pstack-claude
-claude plugin install pstack@pstack-claude
-codex plugin marketplace add lvieirajr/pstack-claude
-codex plugin add pstack@pstack-claude
 
 # Zsh completions
 echo "Configuring zsh completions..."

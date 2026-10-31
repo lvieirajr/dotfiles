@@ -3,6 +3,7 @@ aws-cli = "latest"
 bun = "latest"
 gh = "latest"
 k9s = "latest"
+kubectl = "latest"
 node = "lts"
 python = "3.14"
 usage = "latest"
@@ -15,13 +16,15 @@ activate_aggressive = true
 env_shell_expand = true
 exec_auto_install = true
 experimental = true
-minimum_release_age = "7d"
+minimum_release_age = "1d"
 not_found_auto_install = true
 npm.package_manager = "bun"
 pipx.uvx = true
 python.uv_venv_auto = "create|source"
+self_update.auto = true
 task.run_auto_install = true
 trusted_config_paths = ["~/.config/mise", "~/Workspace"]
 
 [env]
 UV_COMPILE_BYTECODE = true
+UV_LINK_MODE = "copy"
