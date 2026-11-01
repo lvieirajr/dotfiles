@@ -138,6 +138,14 @@ Before finishing:
 
 Do not silently ignore failing checks.
 
+
+## 9. Subagents
+
+- Run a verifier agent only on the top PR of a stack or on a risky PR. Run the
+  full suite once per stack, not once per agent.
+- A subagent returns a short summary. If its full report is long, it writes the
+  report to a file and returns the path.
+
 ---
 
 These guidelines are working if:
@@ -154,7 +162,7 @@ These guidelines are working if:
 
 Apply these role overrides only in Codex. Other runtimes use their own model configuration.
 
-User rule (2026-10-30): effort caps per model. GPT-6 Astra (gpt-6-astra) never runs above medium effort; GPT-6.1 Sol (gpt-6.1-sol) never runs above high effort; GPT-6.1 Terra (gpt-6.1-terra) and GPT-6 Luna (gpt-6-luna) never run above xhigh effort. These are ceilings, not targets: pick the effort the job needs as usual (session level, role @level, poteto-mode's raise or lower), and only if that lands above the model's cap, drop it to the cap. Never raise effort toward the cap. Apply the cap after all task effort adjustments, before dispatching.
+User rule (2026-10-30): effort caps per model. GPT-6 Astra (gpt-6-astra) never runs above low effort; GPT-6.1 Sol (gpt-6.1-sol) never runs above medium effort; GPT-6.1 Terra (gpt-6.1-terra) never runs above high effort; GPT-6 Luna (gpt-6-luna) never runs above xhigh effort. These are ceilings, not targets: pick the effort the job needs as usual (session level, role @level, poteto-mode's raise or lower), and only if that lands above the model's cap, drop it to the cap. Never raise effort toward the cap. Apply the cap after all task effort adjustments, before dispatching.
 
 feature, refactoring: gpt-6.1-terra
 bug-fix: gpt-6.1-sol
